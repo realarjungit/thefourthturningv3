@@ -1,0 +1,811 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>SOVEREIGN DESK · 3-Week Forecast · 15 May → 5 Jun 2026</title>
+<style>
+:root {
+  --bg-0: #07090c;
+  --bg-1: #0c1014;
+  --bg-2: #11171d;
+  --bg-3: #161e26;
+  --line: #1f2a35;
+  --line-2: #2a3744;
+  --ink-1: #e8eef5;
+  --ink-2: #9aa9bb;
+  --ink-3: #5e6e80;
+  --amber: #f0b429;
+  --red: #ff4d4f;
+  --green: #38d39f;
+  --orange: #ff8a3d;
+  --mono: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+  --serif: Georgia, 'Times New Roman', serif;
+  --body: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg-0);
+  color: var(--ink-1);
+  font-family: var(--body);
+  font-size: 14px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  background-image: radial-gradient(ellipse 900px 500px at 20% 0%, rgba(255, 77, 79, 0.06), transparent 60%);
+}
+
+/* TOP BAR */
+.topbar {
+  position: sticky; top: 0; z-index: 100;
+  background: rgba(7, 9, 12, 0.95);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--line);
+  padding: 10px 24px;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.logo { color: var(--amber); font-weight: 700; display: flex; gap: 8px; align-items: center; }
+.dot { width: 7px; height: 7px; background: var(--red); border-radius: 50%; animation: pulse 1.4s ease-in-out infinite; }
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+.crumbs { color: var(--ink-3); display: flex; gap: 12px; }
+.crumbs .active { color: var(--ink-1); }
+.right { margin-left: auto; color: var(--ink-3); display: flex; gap: 16px; }
+.right .live { color: var(--red); }
+
+/* TICKER */
+.ticker {
+  background: var(--bg-1);
+  border-bottom: 1px solid var(--line);
+  padding: 9px 24px;
+  font-family: var(--mono);
+  font-size: 11px;
+  display: flex;
+  gap: 28px;
+  overflow-x: auto;
+  white-space: nowrap;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+.ticker::-webkit-scrollbar { display: none; }
+.ticker .item { display: inline-flex; gap: 6px; align-items: center; }
+.ticker .lbl { color: var(--ink-3); }
+.ticker .val { color: var(--ink-1); font-weight: 500; }
+.ticker .chg.up { color: var(--red); }
+.ticker .chg.down { color: var(--green); }
+.ticker .chg.warn { color: var(--amber); }
+
+.page {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 40px 24px 80px;
+}
+
+/* HERO */
+.hero { padding-bottom: 32px; border-bottom: 1px solid var(--line); margin-bottom: 40px; }
+.hero .meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin-bottom: 18px;
+}
+.tag {
+  padding: 3px 10px;
+  border: 1px solid var(--line-2);
+  color: var(--ink-2);
+}
+.tag.red { border-color: var(--red); color: var(--red); background: rgba(255,77,79,0.05); }
+.tag.amber { border-color: var(--amber); color: var(--amber); background: rgba(240,180,41,0.05); }
+
+.hero h1 {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: clamp(32px, 5vw, 56px);
+  line-height: 1.1;
+  letter-spacing: -0.015em;
+  margin-bottom: 16px;
+}
+.hero h1 em { color: var(--amber); font-style: italic; }
+.hero h1 .red { color: var(--red); }
+.hero .deck {
+  font-family: var(--serif);
+  font-size: 17px;
+  line-height: 1.6;
+  color: var(--ink-2);
+  max-width: 920px;
+  font-style: italic;
+}
+.hero .deck b { color: var(--ink-1); font-style: normal; font-weight: 600; }
+
+/* REALITY CHECK BAR */
+.reality {
+  margin-top: 28px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  background: var(--line);
+  border: 1px solid var(--line);
+}
+.reality .cell {
+  background: var(--bg-1);
+  padding: 16px 18px;
+}
+.reality .l {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  color: var(--ink-3);
+  text-transform: uppercase;
+}
+.reality .v {
+  font-family: var(--serif);
+  font-size: 32px;
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  margin: 4px 0 2px;
+}
+.reality .v.red { color: var(--red); }
+.reality .v.amber { color: var(--amber); }
+.reality .sub {
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--ink-3);
+}
+.reality .sub.up { color: var(--red); }
+
+/* PROB DISTRIBUTION */
+.prob-section {
+  margin-bottom: 48px;
+}
+.prob-section h2 {
+  font-family: var(--serif);
+  font-size: 22px;
+  font-weight: 400;
+  font-style: italic;
+  margin-bottom: 20px;
+  color: var(--ink-1);
+}
+.prob-section h2 em { color: var(--amber); }
+.prob-bars { display: flex; flex-direction: column; gap: 10px; }
+.prob-row {
+  display: grid;
+  grid-template-columns: 140px 1fr 80px;
+  gap: 14px;
+  align-items: center;
+  font-family: var(--mono);
+  font-size: 11px;
+}
+.prob-row .name { color: var(--ink-2); letter-spacing: 0.08em; text-transform: uppercase; }
+.prob-row .bar-wrap {
+  height: 18px;
+  background: var(--bg-2);
+  border: 1px solid var(--line);
+  position: relative;
+  overflow: hidden;
+}
+.prob-row .bar {
+  height: 100%;
+  position: relative;
+  transition: width 0.6s ease;
+}
+.prob-row.bull .bar { background: linear-gradient(90deg, var(--green), rgba(56,211,159,0.4)); }
+.prob-row.base .bar { background: linear-gradient(90deg, var(--amber), rgba(240,180,41,0.4)); }
+.prob-row.bear .bar { background: linear-gradient(90deg, var(--orange), rgba(255,138,61,0.4)); }
+.prob-row.crisis .bar { background: linear-gradient(90deg, var(--red), rgba(255,77,79,0.4)); }
+.prob-row.bear .name, .prob-row.bear .pct { color: var(--orange); }
+.prob-row .pct { font-size: 13px; font-weight: 600; text-align: right; color: var(--ink-1); }
+.prob-row .marker {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.15em;
+  color: rgba(7,9,12,0.85);
+  font-weight: 700;
+}
+.prob-row.bear .marker { color: var(--ink-1); }
+
+/* WEEKS GRID */
+.weeks-section h2 {
+  font-family: var(--serif);
+  font-size: 28px;
+  font-weight: 400;
+  margin-bottom: 8px;
+  letter-spacing: -0.01em;
+}
+.weeks-section h2 em { color: var(--amber); font-style: italic; }
+.weeks-section .sub-deck {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 16px;
+  color: var(--ink-2);
+  margin-bottom: 28px;
+  max-width: 800px;
+}
+
+.weeks {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+}
+.week {
+  background: var(--bg-1);
+  border: 1px solid var(--line);
+  padding: 22px 22px 24px;
+  position: relative;
+}
+.week::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 0;
+  width: 100%; height: 2px;
+}
+.week.w1::before { background: var(--amber); }
+.week.w2::before { background: var(--orange); }
+.week.w3::before { background: var(--red); }
+
+.week .when {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+.week.w1 .when { color: var(--amber); }
+.week.w2 .when { color: var(--orange); }
+.week.w3 .when { color: var(--red); }
+.week h3 {
+  font-family: var(--serif);
+  font-size: 22px;
+  font-weight: 400;
+  line-height: 1.2;
+  margin-bottom: 4px;
+}
+.week .stage {
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--ink-3);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 18px;
+}
+.week ul { list-style: none; }
+.week li {
+  padding: 11px 0;
+  border-bottom: 1px dashed var(--line);
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--ink-2);
+}
+.week li:last-child { border-bottom: none; }
+.week li b { color: var(--ink-1); display: block; margin-bottom: 3px; font-weight: 600; font-size: 13px; }
+.week li .prob-tag {
+  display: inline-block;
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 1px 6px;
+  margin-right: 6px;
+  background: var(--bg-3);
+  border: 1px solid var(--line);
+  color: var(--ink-3);
+}
+.week li .prob-tag.high { color: var(--red); border-color: var(--red); }
+.week li .prob-tag.med { color: var(--amber); border-color: var(--amber); }
+
+.week .conf {
+  margin-top: 16px;
+  padding-top: 14px;
+  border-top: 1px solid var(--line-2);
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+.week .conf b { color: var(--ink-1); }
+
+/* KEY PRICES PROJECTION */
+.proj-section {
+  margin-top: 48px;
+  background: var(--bg-1);
+  border: 1px solid var(--line);
+  padding: 28px 28px 32px;
+}
+.proj-section h2 {
+  font-family: var(--serif);
+  font-size: 22px;
+  font-weight: 400;
+  font-style: italic;
+  margin-bottom: 20px;
+}
+.proj-section h2 em { color: var(--amber); }
+.proj-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: var(--mono);
+  font-size: 12px;
+}
+.proj-table th {
+  text-align: left;
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--line-2);
+  color: var(--ink-3);
+  font-weight: 500;
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+.proj-table th:first-child { padding-left: 0; }
+.proj-table th.r, .proj-table td.r { text-align: right; }
+.proj-table td {
+  padding: 12px;
+  border-bottom: 1px solid var(--line);
+  color: var(--ink-1);
+}
+.proj-table td:first-child { padding-left: 0; }
+.proj-table td.metric { color: var(--ink-2); font-family: var(--body); font-size: 13px; }
+.proj-table td.now { color: var(--ink-1); }
+.proj-table td.w1 { color: var(--amber); }
+.proj-table td.w2 { color: var(--orange); }
+.proj-table td.w3 { color: var(--red); font-weight: 600; }
+
+/* WATCH-LIST */
+.watch {
+  margin-top: 40px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+.watch-card {
+  background: var(--bg-1);
+  border: 1px solid var(--line);
+  padding: 22px 24px;
+}
+.watch-card h3 {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-1);
+  margin-bottom: 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.watch-card h3.red { color: var(--red); }
+.watch-card h3.green { color: var(--green); }
+.watch-card h3::before {
+  content: '';
+  width: 6px; height: 6px;
+  border-radius: 50%;
+}
+.watch-card h3.red::before { background: var(--red); }
+.watch-card h3.green::before { background: var(--green); }
+.watch-card ul { list-style: none; }
+.watch-card li {
+  padding: 10px 0;
+  border-bottom: 1px dashed var(--line);
+  font-size: 13px;
+  line-height: 1.55;
+  color: var(--ink-2);
+}
+.watch-card li:last-child { border-bottom: none; }
+.watch-card li b { color: var(--ink-1); }
+
+/* CLOSING */
+.closing {
+  margin-top: 48px;
+  padding: 32px 36px;
+  background: linear-gradient(135deg, rgba(255,77,79,0.06), rgba(240,180,41,0.04));
+  border: 1px solid var(--red);
+  position: relative;
+}
+.closing::before {
+  content: 'BOTTOM LINE';
+  position: absolute;
+  top: 14px;
+  right: 24px;
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.3em;
+  color: var(--red);
+}
+.closing p {
+  font-family: var(--serif);
+  font-size: 17px;
+  line-height: 1.65;
+  color: var(--ink-2);
+  margin-bottom: 12px;
+  max-width: 900px;
+}
+.closing p:last-child { margin-bottom: 0; }
+.closing p b { color: var(--ink-1); font-weight: 600; }
+.closing p em { color: var(--amber); font-style: normal; font-weight: 500; }
+
+footer {
+  margin-top: 40px;
+  padding-top: 24px;
+  border-top: 1px solid var(--line);
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  color: var(--ink-3);
+  text-transform: uppercase;
+}
+
+@media (max-width: 900px) {
+  .weeks { grid-template-columns: 1fr; }
+  .reality { grid-template-columns: 1fr 1fr; }
+  .watch { grid-template-columns: 1fr; }
+  .prob-row { grid-template-columns: 100px 1fr 60px; gap: 10px; font-size: 10px; }
+}
+@media (max-width: 600px) {
+  .page { padding: 28px 16px 60px; }
+  .topbar { padding: 10px 16px; gap: 12px; }
+  .crumbs { display: none; }
+  .reality { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="logo"><span class="dot"></span> SOVEREIGN DESK</div>
+  <div class="crumbs">
+    <span>India</span><span>›</span><span class="active">3-Week Forecast · Vol IV Issue 15</span>
+  </div>
+  <div class="right">
+    <span>16 MAY 2026</span>
+    <span class="live">● LIVE</span>
+  </div>
+</div>
+
+<div class="ticker">
+  <span class="item"><span class="lbl">USD/INR</span><span class="val">95.91</span><span class="chg up">▲ ALL-TIME LOW</span></span>
+  <span class="item"><span class="lbl">BRENT</span><span class="val">$107</span><span class="chg warn">⚠ ELEVATED</span></span>
+  <span class="item"><span class="lbl">CPI</span><span class="val">6.4%</span><span class="chg up">▲ above band</span></span>
+  <span class="item"><span class="lbl">FOREX RES</span><span class="val">$602B</span><span class="chg down">▼ -$38B since Feb</span></span>
+  <span class="item"><span class="lbl">PETROL</span><span class="val">₹97.77</span><span class="chg up">▲ +₹3.14</span></span>
+  <span class="item"><span class="lbl">10Y G-SEC</span><span class="val">7.31%</span><span class="chg up">▲ +44bps</span></span>
+  <span class="item"><span class="lbl">HORMUZ</span><span class="val">CONTESTED</span><span class="chg up">▲</span></span>
+</div>
+
+<div class="page">
+
+  <header class="hero">
+    <div class="meta">
+      <span class="tag red">⚠ FORECAST UPDATE · INR REVISED</span>
+      <span class="tag amber">3-WEEK HORIZON · 16 MAY → 5 JUN</span>
+      <span class="tag">VOL. IV · ISSUE 15</span>
+    </div>
+    <h1>INR at <span class="red">95.91</span>.<br/>The base case is <em>dead.</em></h1>
+    <p class="deck">
+      The rupee has broken through every level my previous model called for in <b>12 months</b> — in <b>14 days</b>. India is now the worst-performing currency in Asia for 2026. This is no longer a managed grind; it is an active second-leg shock. What follows is the revised 21-day forecast: what happens, when, and to what price.
+    </p>
+
+    <div class="reality">
+      <div class="cell">
+        <div class="l">INR — previous call</div>
+        <div class="v">89.20</div>
+        <div class="sub">Base case forecast</div>
+      </div>
+      <div class="cell">
+        <div class="l">INR — reality today</div>
+        <div class="v red">95.91</div>
+        <div class="sub up">▲ +7.5% over 14 days</div>
+      </div>
+      <div class="cell">
+        <div class="l">Crude in rupee terms</div>
+        <div class="v amber">+86%</div>
+        <div class="sub">vs Feb 28 baseline · not 73%</div>
+      </div>
+      <div class="cell">
+        <div class="l">Petrol hike — adequate?</div>
+        <div class="v red">NO</div>
+        <div class="sub">Calibrated against INR 89</div>
+      </div>
+    </div>
+  </header>
+
+  <section class="prob-section">
+    <h2>Probability distribution · <em>shifted right by one full bucket</em></h2>
+    <div class="prob-bars">
+      <div class="prob-row bull">
+        <span class="name">Bullish</span>
+        <div class="bar-wrap"><div class="bar" style="width: 8%"><span class="marker">8%</span></div></div>
+        <span class="pct">8%</span>
+      </div>
+      <div class="prob-row base">
+        <span class="name">Base case</span>
+        <div class="bar-wrap"><div class="bar" style="width: 25%"><span class="marker">25%</span></div></div>
+        <span class="pct">25%</span>
+      </div>
+      <div class="prob-row bear">
+        <span class="name">Bearish ◄ WE ARE HERE</span>
+        <div class="bar-wrap"><div class="bar" style="width: 50%"><span class="marker">50% · LIVE</span></div></div>
+        <span class="pct">50%</span>
+      </div>
+      <div class="prob-row crisis">
+        <span class="name">Crisis</span>
+        <div class="bar-wrap"><div class="bar" style="width: 17%"><span class="marker">17%</span></div></div>
+        <span class="pct">17%</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="weeks-section">
+    <h2>The next <em>21 days</em> · what to expect</h2>
+    <p class="sub-deck">
+      Revised against INR 95.91 reality. Confidence levels are higher than the previous memo because the currency move has eliminated optionality on most policy responses.
+    </p>
+
+    <div class="weeks">
+
+      <div class="week w1">
+        <div class="when">WEEK 1 · MAY 16–22</div>
+        <h3>Pass-through shock</h3>
+        <div class="stage">FIRST WAVE · IMMEDIATE PASS-THROUGH</div>
+        <ul>
+          <li>
+            <span class="prob-tag high">95% prob</span>
+            <b>Second OMC fuel hike of ₹2–4/litre</b>
+            The ₹3.14 hike was calibrated to INR 89. At INR 95.91, OMCs are already underwater again. Expect a follow-on hike within 7–10 days, possibly broken into two smaller revisions for political optics.
+          </li>
+          <li>
+            <span class="prob-tag high">90% prob</span>
+            <b>Non-subsidised LPG cylinder +₹80–120</b>
+            Domestic LPG (Indane, HP, Bharat) revision triggered by both crude and INR. Subsidised cylinders held for political reasons.
+          </li>
+          <li>
+            <span class="prob-tag high">85% prob</span>
+            <b>Imported goods reprice — electronics, phones, laptops</b>
+            7.5% INR move flows through within 7–14 days. Apple, Samsung, Dell, HP price lists revised. Foreign service subscriptions (Netflix, AWS, Adobe billed in USD) automatically more expensive.
+          </li>
+          <li>
+            <span class="prob-tag med">75% prob</span>
+            <b>Trucker associations announce 10–14% freight surcharge</b>
+            Across major lanes. Up from the 8–12% I previously forecast — INR move makes the prior estimate inadequate.
+          </li>
+          <li>
+            <span class="prob-tag med">70% prob</span>
+            <b>RBI verbal intervention escalates</b>
+            Governor commentary, possible $5–8B additional reserve drawdown to slow INR decline. Watch for forward-market intervention.
+          </li>
+        </ul>
+        <div class="conf">
+          <span>Confidence</span>
+          <b>VERY HIGH · 88%</b>
+        </div>
+      </div>
+
+      <div class="week w2">
+        <div class="when">WEEK 2 · MAY 23–29</div>
+        <h3>Food shelf shock</h3>
+        <div class="stage">SECOND WAVE · KITCHEN-LEVEL TRANSMISSION</div>
+        <ul>
+          <li>
+            <span class="prob-tag high">85% prob</span>
+            <b>Vegetables spike 20–30% in mandi prices</b>
+            Onion, tomato, potato lead. Cold chain runs on diesel; freight rates have already moved. Watch APMC bulletins from Lasalgaon (onion), Kolar (tomato).
+          </li>
+          <li>
+            <span class="prob-tag high">80% prob</span>
+            <b>FMCG sweep: Britannia, Parle, Nestlé, ITC, HUL reprice</b>
+            3–6% headline increase or — more likely given competitive dynamics — pack-size reduction (shrinkflation) of 5–10% across biscuits, snacks, soaps, detergents.
+          </li>
+          <li>
+            <span class="prob-tag high">85% prob</span>
+            <b>Edible oil retail +₹12–18/litre</b>
+            Higher than previous ₹8–15 call. INR move stacks on import duty cut effects. Palm, sunflower, soy all affected.
+          </li>
+          <li>
+            <span class="prob-tag med">75% prob</span>
+            <b>Restaurant/aggregator menu repricing</b>
+            Zomato, Swiggy ASPs +5–8%. Restaurant chains (McDonald's, Dominos, Starbucks India) revise menus.
+          </li>
+          <li>
+            <span class="prob-tag med">70% prob</span>
+            <b>State VAT relief in 2–3 election-bound states</b>
+            Symbolic ₹2–3/litre VAT cuts to absorb political pressure. Maharashtra, Karnataka likely first.
+          </li>
+          <li>
+            <span class="prob-tag med">65% prob</span>
+            <b>Equity market correction 5–8%</b>
+            Nifty/Sensex pressure from FPI outflow as INR remains weak. IT and pharma defensive; metals, banks, autos vulnerable.
+          </li>
+        </ul>
+        <div class="conf">
+          <span>Confidence</span>
+          <b>HIGH · 76%</b>
+        </div>
+      </div>
+
+      <div class="week w3">
+        <div class="when">WEEK 3 · MAY 30 – JUN 5</div>
+        <h3>Institutional response</h3>
+        <div class="stage">THIRD WAVE · POLICY & STRUCTURAL MOVES</div>
+        <ul>
+          <li>
+            <span class="prob-tag high">85% prob</span>
+            <b>RBI formal acknowledgement of overshoot</b>
+            MPC commentary or off-cycle statement admitting CPI will breach 6% upper band for 2–3 quarters. Code for: rate cut delay, possible surprise hike on table.
+          </li>
+          <li>
+            <span class="prob-tag high">80% prob</span>
+            <b>LRS / outbound remittance tightening</b>
+            Formal cut to LRS annual limit from $250K to $125–200K, or higher TCS on outbound travel/remittance. This is no longer "possible" — it is the textbook response when worst-performing-currency-in-Asia meets capital outflow pressure.
+          </li>
+          <li>
+            <span class="prob-tag high">80% prob</span>
+            <b>CNG/PNG city gas hike across 6–10 metros</b>
+            IGL (Delhi), MGL (Mumbai), GGL (Gujarat), AGL (Andhra), all under cost pressure. Expect ₹2–4 increases.
+          </li>
+          <li>
+            <span class="prob-tag med">70% prob</span>
+            <b>Cooking oil duty cut + FCI wheat release</b>
+            Government drops import duty on palm/sunflower/soybean oil to manage CPI optics. FCI releases wheat stocks to OMSS (open market sale scheme).
+          </li>
+          <li>
+            <span class="prob-tag med">60% prob</span>
+            <b>RBI signals managed-fall stance on INR</b>
+            Effectively stops defending a specific level. Reserve burn slows. INR finds a new floor anywhere between 96–99.
+          </li>
+          <li>
+            <span class="prob-tag med">55% prob</span>
+            <b>FPI debt outflow $4–7B</b>
+            If 10Y G-Sec crosses 7.5%. Triggers second leg of equity correction.
+          </li>
+          <li>
+            <span class="prob-tag med">45% prob</span>
+            <b>Election-state freebies announced</b>
+            Subsidised cylinder, free transport for women, electricity cost protection. Populism as inflation cover.
+          </li>
+        </ul>
+        <div class="conf">
+          <span>Confidence</span>
+          <b>MEDIUM-HIGH · 68%</b>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="proj-section">
+    <h2>Where the <em>numbers</em> land · price trajectory</h2>
+    <table class="proj-table">
+      <thead>
+        <tr>
+          <th>Metric</th>
+          <th class="r">Now (16 May)</th>
+          <th class="r">End Week 1</th>
+          <th class="r">End Week 2</th>
+          <th class="r">End Week 3 (5 Jun)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="metric">USD / INR</td>
+          <td class="r now">95.91</td>
+          <td class="r w1">96.5 – 97.2</td>
+          <td class="r w2">97 – 98</td>
+          <td class="r w3">97 – 99</td>
+        </tr>
+        <tr>
+          <td class="metric">Petrol (Delhi)</td>
+          <td class="r now">₹97.77</td>
+          <td class="r w1">₹99 – 101</td>
+          <td class="r w2">₹100 – 103</td>
+          <td class="r w3">₹102 – 106</td>
+        </tr>
+        <tr>
+          <td class="metric">Diesel (Delhi)</td>
+          <td class="r now">₹90.67</td>
+          <td class="r w1">₹92 – 94</td>
+          <td class="r w2">₹93 – 96</td>
+          <td class="r w3">₹95 – 99</td>
+        </tr>
+        <tr>
+          <td class="metric">CPI (annual)</td>
+          <td class="r now">6.4%</td>
+          <td class="r w1">6.4 – 6.7%</td>
+          <td class="r w2">6.7 – 7.1%</td>
+          <td class="r w3">7.0 – 7.5%</td>
+        </tr>
+        <tr>
+          <td class="metric">10Y G-Sec yield</td>
+          <td class="r now">7.31%</td>
+          <td class="r w1">7.35 – 7.45%</td>
+          <td class="r w2">7.40 – 7.55%</td>
+          <td class="r w3">7.50 – 7.70%</td>
+        </tr>
+        <tr>
+          <td class="metric">Forex reserves</td>
+          <td class="r now">$602B</td>
+          <td class="r w1">$595 – 598B</td>
+          <td class="r w2">$588 – 593B</td>
+          <td class="r w3">$580 – 588B</td>
+        </tr>
+        <tr>
+          <td class="metric">Vegetable index</td>
+          <td class="r now">baseline</td>
+          <td class="r w1">+8 – 12%</td>
+          <td class="r w2">+18 – 28%</td>
+          <td class="r w3">+22 – 35%</td>
+        </tr>
+        <tr>
+          <td class="metric">Household monthly burden (urban MC)</td>
+          <td class="r now">+₹3,020</td>
+          <td class="r w1">+₹3,400</td>
+          <td class="r w2">+₹4,100</td>
+          <td class="r w3">+₹4,800 – 5,500</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="watch">
+    <div class="watch-card">
+      <h3 class="red">UPSIDE RISK · WHAT MAKES IT WORSE</h3>
+      <ul>
+        <li><b>INR breaks 99/100.</b> Triggers formal capital controls. LRS may be cut harder. Watch RBI commentary daily.</li>
+        <li><b>Hormuz tanker incident.</b> Any actual attack on a tanker reprices Brent to $130–140 within 48 hours.</li>
+        <li><b>FPI panic.</b> If 10Y crosses 7.6%, debt outflows accelerate. Self-reinforcing INR spiral.</li>
+        <li><b>Monsoon weak start.</b> IMD has flagged El Niño risk. Weak June monsoon adds food inflation on top.</li>
+      </ul>
+    </div>
+    <div class="watch-card">
+      <h3 class="green">DOWNSIDE RISK · WHAT MAKES IT BETTER</h3>
+      <ul>
+        <li><b>US-Iran ceasefire holds.</b> Brent could fall to $95–100 in days. INR could recover 2–3 rupees.</li>
+        <li><b>RBI surprise rate hold + hawk pivot.</b> Defends INR more credibly than reserves alone.</li>
+        <li><b>SPR coordinated release.</b> US/IEA strategic petroleum release would cool oil curve.</li>
+        <li><b>Strong dollar reverses.</b> If DXY softens (Fed dovish), all EM currencies including INR benefit.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="closing">
+    <p>
+      <b>What citizens should hear, plainly:</b> the price increases over the past week — fuel, milk, bread, gold duty — are <em>not the peak</em>. They are the <em>floor</em> of a new range. The INR at 95.91 has not yet been passed through. That pass-through arrives in your supermarket bill, electricity bill, and EMI calculation over the next 14–21 days.
+    </p>
+    <p>
+      <b>What to do practically:</b> if you have a flexible foreign purchase (electronics, travel, overseas tuition payment), pay this week — not next. If you have a SIP, do not pause it on impulse — INR-weakness benefits export earners (IT, pharma) in your portfolio. If you operate a small business with imported inputs, lock in supplier prices now. If you rely on diesel for operations, expect fare/freight revisions to lag your costs by 2–3 weeks — that gap is your margin loss.
+    </p>
+    <p>
+      <b>The forecast in one sentence:</b> by 5 June, expect petrol near ₹104, CPI around 7%, INR at 97–98, and at least one formal capital control on outbound remittance. <em>The defensive posture is no longer holding. The state will move to the next playbook in the next 21 days.</em>
+    </p>
+  </section>
+
+  <footer>
+    <span>SOVEREIGN DESK · INDIA</span>
+    <span>VOL IV · ISSUE 15 · 16 MAY 2026</span>
+    <span>NEXT UPDATE · 23 MAY 2026</span>
+  </footer>
+
+</div>
+
+</body>
+</html>
